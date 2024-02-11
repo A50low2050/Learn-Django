@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% for advert in adverts %}
+<div class="block__adverts">
+    {{ advert.title }}
+    <div class="link__to__chat">
+        <a href="{% url 'chat' advert_id=advert.pk %}">Send message</a>
+    </div>
+</div>
+{% endfor %}
+
+</body>
+</html>
