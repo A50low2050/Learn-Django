@@ -6,6 +6,9 @@ from .models import (
     Album,
     Artist,
     Song,
+    Publication,
+    Article,
+    Membership,
 )
 
 
@@ -36,4 +39,19 @@ class AdminArtist(admin.ModelAdmin):
 
 @admin.register(Song)
 class AdminSong(admin.ModelAdmin):
+    pass
+
+
+class MembershipInline(admin.TabularInline):
+    model = Membership
+    extra = 0
+
+
+@admin.register(Article)
+class AdminArticle(admin.ModelAdmin):
+    inlines = [MembershipInline, ]
+
+
+@admin.register(Publication)
+class AdminPublication(admin.ModelAdmin):
     pass
