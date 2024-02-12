@@ -1,7 +1,7 @@
 
 from django.shortcuts import render
 
-from .models import Advert, Chat
+from .models import Advert, Chat, User
 
 
 def adverts_list(request):
@@ -13,8 +13,7 @@ def adverts_list(request):
 
 
 def adverts_create(request):
-    advert = Advert.objects.create(title='Testing Advert')
-
+    Advert.objects.get_or_create(title='test advert')
     context = {
 
     }
@@ -22,12 +21,15 @@ def adverts_create(request):
 
 
 def chat(request, advert_id):
+    user = User.objects.get(pk=1)
     advert = Advert.objects.get(pk=advert_id)
 
-    chat = Chat.objects.create(
+    chat, created = Chat.objects.get_or_create(
         name=advert.title,
     )
-    chat.save()
+
+    chat.members.add(user)
+    chat.advert_set.add(advert)
 
     context = {
 
